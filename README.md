@@ -1,3 +1,2 @@
 # OOP
-Kolokvijumi i lab vezbe iz oop
-# Hello
+Kolokvijumi i lab vezbe iz objektno orijentisanog programiranja
