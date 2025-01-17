@@ -1,6 +1,5 @@
 #include "DocumentWindow.h"
 #include "DialogWindow.h"
-#include <iostream>
 #include <fstream>
 using namespace std;
 
@@ -16,20 +15,16 @@ int main() {
 
 		for (int i = 0; i < 1009; i++)
 		{
-			ulazni_file.getline(buffer, 6, ' ');
-			ulazni_file >> stanje;
-			ulazni_file.get();
+			ulazni_file >> buffer >> stanje;
 			niz[i] = new DialogWindow(buffer, stanje);
 		}
 		for (int i = 1009; i < 2018; i++)
 		{
-			ulazni_file.getline(buffer, 6, ' ');
-			ulazni_file >> stanje;
-			ulazni_file.get();
+			ulazni_file >> buffer >> stanje;
 			niz[i] = new DocumentWindow(buffer, stanje);
 		}
-		delete[] buffer;
 		ulazni_file.close();
+		delete[] buffer;
 	}
 
 	niz[5]->draw();
@@ -41,16 +36,16 @@ int main() {
 	niz[1111]->close();
 	niz[1111]->Window::draw();
 
-	Window* pom = new Window();
+	Window pom;
 	for (int i = 0; i < 2017; i++)
 	{
 		for (int j = 0; j < 2018; j++)
 		{
 			if (strcmp(niz[i]->ReturnTitle(), niz[j]->ReturnTitle()) < 0)
 			{
-				*pom = *niz[i];
+				pom = *niz[i];
 				*niz[i] = *niz[j];
-				*niz[j] = *pom;
+				*niz[j] = pom;
 			}
 		}
 	}
@@ -62,7 +57,6 @@ int main() {
 		{
 			izlazni_file << *niz[i];
 		}
-		izlazni_file.close();
 	}
 
 	for (int i = 0; i < 2018; i++)
